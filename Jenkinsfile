@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage {
             steps('Checkout branch') {
-                git branch 'master', url:'https://github.com/fmbordignonn/library'
+                git branch 'master', url:'https://github.com/fmbordignonn/library.git'
             }
         }
 
