@@ -3,19 +3,19 @@ pipeline {
     stages {
         stage('Checkout branch') {
             steps {
-                sh git branch 'master'
+                git branch: 'master'
             }
         }
 
         stage('Build') {
             steps {
-                sh gradle clean build
+                sh 'gradle clean build'
             }
         }
 
         stage('Test') {
             steps {
-                sh gradle test
+                sh 'gradle test'
             }
         }
 
