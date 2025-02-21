@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage {
-            steps('Checkout branch') {
+        stage('Checkout branch') {
+            steps {
                 git branch 'master'
             }
         }
