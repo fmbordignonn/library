@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('Checkout branch') {
             steps {
-                git branch: 'master'
+                checkout scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    doGenerateSubmoduleConfigurations: false,
+                    userRemoteConfigs: scm.userRemoteConfigs
+                ]
             }
         }
 
