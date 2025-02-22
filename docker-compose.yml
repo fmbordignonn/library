@@ -1,0 +1,29 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongao
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    networks:
+      - minha-rede-local
+
+  meuservico:
+    build: .
+    container_name: servicao
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://admin:admin123@mongo:27017/mydb?authSource=admin
+    networks:
+      - minha-rede-local
+
+networks:
+  minha-rede-local:
+    driver: bridge

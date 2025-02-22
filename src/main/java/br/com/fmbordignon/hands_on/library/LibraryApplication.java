@@ -11,3 +11,7 @@ public class LibraryApplication {
 	}
 
 }
+
+
+//só pra salvar kkk
+//curl -X POST localhost:8080/api/v1/book -H 'Content-Type: application/json' -d '{"name": "nome"}'
