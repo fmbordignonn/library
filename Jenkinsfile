@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'chmod +x gradlew' //teoricamente nao é aqui mas vamos ver se funfa
+                sh 'chmod +x gradlew' //teoricamente nao é aqui mas ta aqui só pra testar
                 sh './gradlew clean build --refresh-dependencies'
             }
         }
