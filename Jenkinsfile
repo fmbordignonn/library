@@ -12,7 +12,7 @@ pipeline {
                 script {
                     def versionOutput = sh(script: "grep '^version' build.gradle | awk '{print \$3}' | tr -d \"'\"", returnStdout: true).trim()
                     env.IMAGE_TAG = versionOutput
-                    echo '$IMAGE_TAG'
+                    echo $IMAGE_TAG
                 }
             }
         }
