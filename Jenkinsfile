@@ -78,7 +78,7 @@ pipeline {
             echo 'Pipeline buildou'
         }
         failure {
-            'Vish pipeline falhou'
+            echo 'Vish pipeline falhou'
         }
     }
 }
