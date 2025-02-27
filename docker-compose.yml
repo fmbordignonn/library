@@ -9,21 +9,48 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123
     networks:
-      - minha-rede-local
+      - my-local-network
 
-  meuservico:
+  app1:
     build: .
-    container_name: servicao
+    container_name: app1
     restart: always
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       - mongo
     environment:
       MONGODB_URI: mongodb://admin:admin123@mongo:27017/mydb?authSource=admin
     networks:
-      - minha-rede-local
+      - my-local-network
+
+  app2:
+    build: .
+    container_name: app2
+    restart: always
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://admin:admin123@mongo:27017/mydb?authSource=admin
+    networks:
+      - my-local-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginxao
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - my-local-network
 
 networks:
-  minha-rede-local:
+  my-local-network:
     driver: bridge
