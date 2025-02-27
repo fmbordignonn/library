@@ -12,7 +12,6 @@ pipeline {
                 script {
                     def versionOutput = sh(script: "grep '^version' build.gradle | awk '{print \$3}' | tr -d \"'\"", returnStdout: true).trim()
                     env.IMAGE_TAG = versionOutput
-                    echo $IMAGE_TAG
                 }
             }
         }
@@ -43,12 +42,13 @@ pipeline {
 
         stage('Build docker image') {
             steps {
-                sh 'docker build --no-cache -t $IMAGE_NAME:IMAGE_TAG .'
+                sh 'docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .'
             }
         }
 
         stage('Docker hub login') {
             steps {
+            echo 'Logging in docker hub'
                 withCredentials([
                     usernamePassword (
                         credentialsId: DOCKER_HUB_CREDENTIALS,
